@@ -14,7 +14,7 @@ class window.App extends Backbone.Model
   dealerMove: ->
     console.log('dealerMove called');
     dealerScoreMin = (@get 'dealerHand').scores()[0]
-    console.log('dealerscoreMin: ' + dealerScoreMin);
+
 
     if dealerScoreMin > 21
       @set 'winner', 'player' 
@@ -22,8 +22,18 @@ class window.App extends Backbone.Model
 
     if @currentWinner() == 'dealer'
       @set 'winner', 'dealer'
+      console.log('dealerscoreMin: ' + dealerScoreMin);
+      @trigger('dealerStand') if (@get 'dealerHand').length == 2
       return
       #end the game, dealer wins
+
+    if dealerScoreMin > 17
+      @set 'winner', @currentWinner()
+      console.log("dealerScore > 17 " + @currentWinner())
+      @trigger('dealerStand') if (@get 'dealerHand').length == 2
+
+      return
+      #end the game, dealer wins    
       
     if dealerScoreMin <= 17
       (@get 'dealerHand').hit()
@@ -59,7 +69,7 @@ class window.App extends Backbone.Model
       playerScore = playerScoreMin
 
     return 'dealer' if dealerScore > playerScore
-    return 'player' if playerScore < dealerScore
+    return 'player' if playerScore > dealerScore
     return 'push' if playerScore == dealerScore
 
 

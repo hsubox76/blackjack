@@ -1,12 +1,17 @@
 class window.HandView extends Backbone.View
   className: 'hand'
 
-  template: _.template '<h2><% if(isDealer){ %>Dealer<% }else{ %>You<% } %> (<span class="score"></span>)</h2>'
+  template: _.template '<h2><span class="<% if(isDealer){ %>dealer<% }else{ %>player<% } %>-name"><% if(isDealer){ %>Dealer<% }else{ %>You<% } %></span> (<span class="score"></span>)</h2>'
+
+  lastHandSize: 0
 
   initialize: ->
     @collection.on 'add remove change', => 
-      @render()
-      @trigger('rendered')
+      if @collection.length > @lastHandSize
+        @render() 
+        @lastHandSize = @collection.length
+        @trigger('rendered') 
+      
 
     @render()
 
@@ -16,6 +21,10 @@ class window.HandView extends Backbone.View
     @$el.html @template @collection
     @$el.append @collection.map (card) ->
       new CardView(model: card).$el
-    @$('.score').text @collection.scores()[0]
+    if @collection.scores()[1] > 21
+      @$('.score').text @collection.scores()[0]
+    else
+      @$('.score').text @collection.scores()[1]
+    console.log("handview rendering: number of cards " + @collection.length)
 
 
