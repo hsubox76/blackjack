@@ -1,10 +1,17 @@
 # TODO: Refactor this model to use an internal Game Model instead
 # of containing the game logic directly.
 class window.App extends Backbone.Model
+  
   initialize: ->
+
     @set 'deck', deck = new Deck()
-    @set 'playerHand', deck.dealPlayer()
-    @set 'dealerHand', deck.dealDealer()
+    @reset()
+
+  reset: ->
+
+    @set 'winner', null
+    @set 'playerHand', (@get 'deck').dealPlayer()
+    @set 'dealerHand', (@get 'deck').dealDealer()
     (@get 'playerHand').on 'add change', => @checkPlayerScore()
     (@get 'playerHand').on 'stand', =>
       (@get 'dealerHand').at(0).flip()
@@ -12,28 +19,23 @@ class window.App extends Backbone.Model
     (@get 'dealerHand').on 'add', => @dealerMove()
 
   dealerMove: ->
-    console.log('dealerMove called');
-    dealerScoreMin = (@get 'dealerHand').scores()[0]
 
+    dealerScoreMin = (@get 'dealerHand').scores()[0]
 
     if dealerScoreMin > 21
       @set 'winner', 'player' 
       return
 
     if @currentWinner() == 'dealer'
+      #end the game, dealer wins
       @set 'winner', 'dealer'
-      console.log('dealerscoreMin: ' + dealerScoreMin);
       @trigger('dealerStand') if (@get 'dealerHand').length == 2
       return
-      #end the game, dealer wins
 
     if dealerScoreMin > 17
       @set 'winner', @currentWinner()
-      console.log("dealerScore > 17 " + @currentWinner())
       @trigger('dealerStand') if (@get 'dealerHand').length == 2
-
-      return
-      #end the game, dealer wins    
+      return  
       
     if dealerScoreMin <= 17
       (@get 'dealerHand').hit()
@@ -41,7 +43,6 @@ class window.App extends Backbone.Model
 
 
   checkPlayerScore: ->
-    console.log('checkPlayerScore called');
 
     playerScoreMin = (@get 'playerHand').scores()[0]
 
@@ -51,7 +52,6 @@ class window.App extends Backbone.Model
 
 
   currentWinner: ->
-    console.log('currentWinner called');
 
     dealerScoreMin = (@get 'dealerHand').scores()[0]
     dealerScoreMax = (@get 'dealerHand').scores()[1]
@@ -71,7 +71,6 @@ class window.App extends Backbone.Model
     return 'dealer' if dealerScore > playerScore
     return 'player' if playerScore > dealerScore
     return 'push' if playerScore == dealerScore
-
 
 
 

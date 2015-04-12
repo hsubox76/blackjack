@@ -6,6 +6,7 @@
   height: 140px;
   margin-right: 20px;
   background-size: 100px 140px;
+
 }
 
 .covered {
@@ -14,6 +15,30 @@
 
 .hand {
   overflow: auto;
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: red;
+  padding: 10px;
+  background-image: url('../img/wood_table_texture_1_by_tamarar_stock-d5xw0up.jpg');
 }
+
+.game-container {
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: gray;
+}
+
+button {
+ background-color: yellow;
+}
+
+h2 {
+  font-family: Helvetica, arial, sans-serif;
+  color: #fff;
+  font-weight: 400;
+}
+
 
 

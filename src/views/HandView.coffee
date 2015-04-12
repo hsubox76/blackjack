@@ -12,7 +12,6 @@ class window.HandView extends Backbone.View
         @lastHandSize = @collection.length
         @trigger('rendered') 
       
-
     @render()
 
 
@@ -25,6 +24,5 @@ class window.HandView extends Backbone.View
       @$('.score').text @collection.scores()[0]
     else
       @$('.score').text @collection.scores()[1]
-    console.log("handview rendering: number of cards " + @collection.length)
 
 

@@ -17,17 +17,10 @@ class window.Hand extends Backbone.Collection
     score + if card.get 'revealed' then card.get 'value' else 0
   , 0
 
-#  minHiddenScore: -> @reduce (score, card) ->
-#    score + card.get 'value'
-#  , 0
-
   scores: ->
     # The scores are an array of potential scores.
     # Usually, that array contains one element. That is the only score.
     # when there is an ace, it offers you two scores - the original score, and score + 10.
     [@minScore(), @minScore() + 10 * @hasAce()]
-
-#  hiddenScores: ->
-#    [@minHiddenScore(), @minHiddenScore() + 10 * @hasAce()]
 
 
