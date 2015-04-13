@@ -8,21 +8,56 @@
   background-size: 100px 140px;
 
 }
-
 .covered {
   background-image: url('../img/card-back.png');
 }
 
+h2 {
+  font-family: 'Lora', serif;
+  letter-spacing: 0.5em;
+  text-transform: lowercase;
+}
+
+h3 {
+  font-family: 'Lora', serif;
+  margin-top: 0px;
+  color: #fff;
+}
+html {
+  height: 100%;
+}
+body {
+  height: auto;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background: linear-gradient(to bottom, #deefff 0%,#98bede 100%);
+}
+
+.btn {
+  font-family: 'Lora', serif;
+}
+
+.panel-primary {
+  background-image: url('../img/wood-texture-7786.jpg');
+}
+
+.panel {
+  background-color: rgba(150,210,250,0.5);
+  padding: 10px;
+
+}
 .hand {
   overflow: auto;
+  /*
   width: 500px;
   margin-left: auto;
   margin-right: auto;
   background-color: red;
   padding: 10px;
   background-image: url('../img/wood_table_texture_1_by_tamarar_stock-d5xw0up.jpg');
+  */
 }
-
+/*
 .game-container {
   width: 500px;
   margin-left: auto;
@@ -41,4 +76,4 @@ h2 {
 }
 
 
-
+*/
